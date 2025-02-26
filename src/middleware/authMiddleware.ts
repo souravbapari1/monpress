@@ -1,4 +1,4 @@
-import { middleware } from "mon";
+import { middleware } from "monpress";
 
 export const authMiddleware = middleware((req, res, next) => {
   if (req.path.startsWith("/auth")) {

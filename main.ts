@@ -1,6 +1,6 @@
-import { MonPress } from "mon";
-import routes from "./generated/routes.g";
-import { authMiddleware } from "./src/middleware/authMiddleware";
+import { MonPress } from "monpress";
+import routes from "@/generated/routes.g";
+import { authMiddleware } from "@/src/middleware/authMiddleware";
 
 const mon = MonPress({
   routes,

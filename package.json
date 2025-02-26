@@ -16,6 +16,6 @@
   "dependencies": {
     "@types/express": "^5.0.0",
     "express": "^4.21.2",
-    "monpress": "^0.0.21-beta"
+    "monpress": "^0.0.2-beta"
   }
 }

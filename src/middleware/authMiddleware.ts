@@ -7,6 +7,6 @@ export const authMiddleware = middleware((req, res, next) => {
       name: "Sourav",
     };
   }
-  console.log("authMiddleware");
+
   next();
 });

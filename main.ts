@@ -7,6 +7,7 @@ const mon = MonPress({
   middleware: [authMiddleware],
 });
 
-mon.listen(3000, (e) => {
-  console.log("Listening on port 3000");
+const port = process.env.PORT || 3000;
+mon.listen(port, (e) => {
+  console.log("⚡️ Server is running on port http://localhost:" + port);
 });

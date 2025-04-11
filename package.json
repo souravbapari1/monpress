@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "express": "^4.21.2",
-    "monpress": "^0.0.38-beta",
+    "monpress": "^0.1.0-stable",
     "tsx": "^4.19.3"
   }
 }

@@ -5,8 +5,11 @@ import { authMiddleware } from "@/src/middleware/authMiddleware";
 const mon = MonPress({
   routes,
   middleware: [authMiddleware],
-  express(app, http) {},
+  express(app, http) {
+  },
 });
+
+
 
 const port = process.env.PORT || 3000;
 mon.listen(port, () => {

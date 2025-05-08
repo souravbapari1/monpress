@@ -1,15 +1,14 @@
-import { MonPress } from "monpress";
 import routes from "@/generated/routes.g";
 import { authMiddleware } from "@/src/middleware/authMiddleware";
+import express from 'express';
+import { MonPress } from "monpress";
 
 const mon = MonPress({
   routes,
-  middleware: [authMiddleware],
+  middleware: [authMiddleware, express.json()],
   express(app, http) {
   },
 });
-
-
 
 const port = process.env.PORT || 3000;
 mon.listen(port, () => {

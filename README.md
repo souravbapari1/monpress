@@ -156,6 +156,90 @@ const mon = MonPress({
 
 ---
 
+---
+
+## 📁 File Uploading with Multer
+
+Monpress supports file uploading using the popular `multer` middleware. Here's how you can integrate it into your Monpress application:
+
+### 📦 Installation
+
+First, install `multer`:
+
+```sh
+npm install multer
+```
+
+### ⚙️ Configuration
+
+Create a file, for example, `routes/upload.ts`, to handle file uploads. Here's an example of how to configure `multer` and create a route:
+
+```ts
+import { httpRequest } from "monpress";
+import multer from "multer";
+import path from "path";
+
+// Configure storage for uploaded files
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/"); // Folder to store uploaded files
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname)); // e.g., 1624567890-123456789.jpg
+  },
+});
+
+// Create the multer upload instance
+const upload = multer({ storage: storage });
+
+// Example POST request handler with file upload
+export const POST = httpRequest(async (req, res) => {
+  upload.any()(req, res, async (err: any) => {
+    if (err) {
+      return res.status(500).json({ message: "Error uploading file" });
+    }
+    // Files are available in req.files, and other form data in req.body
+    res.json({ files: req.files, body: req.body });
+  });
+});
+```
+
+### 📍 Route Definition
+
+In this example, the `POST` route uses `upload.any()` to handle any number of files. You can also use `upload.single('fieldName')` to handle a single file or `upload.array('fieldName', maxCount)` to handle a specific number of files.
+
+### 🧪 Testing the Upload
+
+You can test this endpoint using `curl`:
+
+```sh
+curl -X POST -F "file=@/path/to/your/file.jpg" http://localhost:3000/upload
+```
+
+Make sure to replace `/path/to/your/file.jpg` with the actual path to your file.
+
+### ⚠️ Error Handling
+
+It's important to handle errors that may occur during the file upload process. In the example above, any error during the upload will result in a 500 status code with an error message.
+
+### 🧱 Middleware Usage
+
+You can also use multer as middleware for specific routes:
+
+```ts
+import { httpRequest } from "monpress";
+import { upload } from "./upload"; // Import the multer instance
+
+export const PATCH = httpRequest(async (req, res) => {
+  res.json({ message: "PATCH request successful" });
+}).middleware(upload.single("file"));
+```
+
+In this case, the `upload.single('file')` middleware is applied only to the `PATCH` route.
+
+---
+
 ## 🔄 Example Workflow
 
 ```sh

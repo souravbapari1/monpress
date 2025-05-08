@@ -8,5 +8,6 @@ export const authMiddleware = middleware((req, res, next) => {
     };
   }
 
+
   next();
 });

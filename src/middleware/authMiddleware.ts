@@ -1,5 +1,6 @@
 import { middleware } from "monpress";
 
+// Global middleware
 export const authMiddleware = middleware((req, res, next) => {
   if (req.path.startsWith("/auth")) {
     req.user = {
@@ -7,7 +8,5 @@ export const authMiddleware = middleware((req, res, next) => {
       name: "Sourav",
     };
   }
-
-
   next();
 });
